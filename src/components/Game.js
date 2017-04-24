@@ -13,7 +13,13 @@ class Game extends Component {
   }
 
   handleTurn(i){
-    this.checkIfValidMove(i);
+    if(!this.checkIfValidMove(i)){
+      this.setState({
+        gameStatus: `Please make a valid move, Player ${this.state.xTurn ? 'X' : 'O'}`
+      });
+      return;
+    }
+
     let squares = this.state.squares
     squares[i] = this.state.xTurn ? 'X' : 'O';
     let status
@@ -32,11 +38,9 @@ class Game extends Component {
 
   checkIfValidMove(i){
     if(this.state.squares[i]){
-      debugger
-      this.setState({
-        gameStatus: `Please make a valid move, Player ${this.state.xTurn}`
-      })
-      return;
+      return false
+    }else{
+      return true
     }
   }
 
