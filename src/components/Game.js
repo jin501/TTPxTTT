@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board';
+import Button from './Button';
+import {checkWinner, getGameStatus, getButtonValue} from '../gameLogic';
 
 class Game extends Component {
   constructor() {
@@ -8,11 +10,13 @@ class Game extends Component {
       squares: Array(9).fill(null),
       xTurn: true,
       gameStatus: "Player X's Turn",
-      players: ""
+      score: [0, 0],
+      buttonValue: "reset"
     };
   }
 
   handleTurn(i){
+    //Check to see if valid move, i.e. there isn't already a token in that position by calling helper function checkIfValidMove
     if(!this.checkIfValidMove(i)){
       this.setState({
         gameStatus: `Please make a valid move, Player ${this.state.xTurn ? 'X' : 'O'}`
@@ -24,31 +28,22 @@ class Game extends Component {
     squares[i] = this.state.xTurn ? 'X' : 'O';
     let status
 
-    if (this.checkWinner(squares)) {
-      this.getGameStatus(this.checkWinner(squares))
-    }
-
     this.setState({
       squares: squares,
       xTurn: !this.state.xTurn,
-      gameStatus: this.getGameStatus()
+      gameStatus: this.getGameStatus(checkWinner(squares)),
+      buttonValue: getButtonValue(squares)
     });
-    // debugger
   }
 
   checkIfValidMove(i){
-    if(this.state.squares[i]){
-      return false
-    }else{
-      return true
-    }
+    return (this.state.squares[i]) ? false : true
   }
 
   getGameStatus(winner){
     if(winner){
-      return "WON"
-      debugger
-    }
+      return `Player ${winner} is the Winner!`
+    };
     if(this.state.xTurn){
       return "Player O's turn"
     }else{
@@ -56,25 +51,6 @@ class Game extends Component {
     }
   }
 
-  checkWinner(squares){
-    const winningCombinations = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
-    ]
-    for (let i = 0; i < winningCombinations.length; i++) {
-      const [a, b, c] = winningCombinations[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
-      }
-    }
-    return null;
-  }
 
   render() {
     return (
@@ -87,6 +63,7 @@ class Game extends Component {
         </div>
         <div className="game-info">
           {this.state.gameStatus}
+          <Button value={this.state.buttonValue} />
         </div>
       </div>
     );

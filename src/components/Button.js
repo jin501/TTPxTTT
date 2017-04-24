@@ -4,7 +4,7 @@ class Button extends Component {
 
   render() {
     return (
-      <button>Reset</button>
+      <button>{this.props.value}</button>
     );
   }
 }
