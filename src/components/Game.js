@@ -7,30 +7,52 @@ class Game extends Component {
     this.state = {
       squares: Array(9).fill(null),
       xTurn: true,
-      gameStatus: "Player X's Turn"
+      gameStatus: "Player X's Turn",
+      players: ""
     };
   }
 
   handleTurn(i){
+    this.checkIfValidMove(i);
     let squares = this.state.squares
     squares[i] = this.state.xTurn ? 'X' : 'O';
-    // if (this.calculateWinner(squares) || squares[i]) {
-    //   debugger
-    // }
+    let status
+
+    if (this.checkWinner(squares)) {
+      this.getGameStatus(this.checkWinner(squares))
+    }
 
     this.setState({
       squares: squares,
       xTurn: !this.state.xTurn,
       gameStatus: this.getGameStatus()
     });
+    // debugger
   }
 
-  getGameStatus(){
-    return "hi"
-    //return X or O
+  checkIfValidMove(i){
+    if(this.state.squares[i]){
+      debugger
+      this.setState({
+        gameStatus: `Please make a valid move, Player ${this.state.xTurn}`
+      })
+      return;
+    }
   }
 
-  calculateWinner(squares){
+  getGameStatus(winner){
+    if(winner){
+      return "WON"
+      debugger
+    }
+    if(this.state.xTurn){
+      return "Player O's turn"
+    }else{
+      return "Player X's turn"
+    }
+  }
+
+  checkWinner(squares){
     const winningCombinations = [
       [0, 1, 2],
       [3, 4, 5],
