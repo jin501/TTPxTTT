@@ -9,13 +9,17 @@ class Game extends Component {
     this.state = {
       squares: Array(9).fill(null),
       xTurn: true,
-      gameStatus: "Player X's Turn",
+      gameStatus: "Player T's Turn",
       score: [0, 0],
-      buttonValue: "reset"
+      buttonValue: "reset",
+      gameFinished: false
     };
   }
 
   handleTurn(i){
+    if(this.state.gameFinished){
+      return;
+    }
     //Check to see if valid move, i.e. there isn't already a token in that position by calling helper function checkIfValidMove
     if(!this.checkIfValidMove(i)){
       this.setState({
@@ -25,15 +29,28 @@ class Game extends Component {
     }
 
     let squares = this.state.squares
-    squares[i] = this.state.xTurn ? 'X' : 'O';
+    squares[i] = this.state.xTurn ? 'T' : 'P';
     let status
-
+    let winner = checkWinner(squares);
     this.setState({
       squares: squares,
       xTurn: !this.state.xTurn,
-      gameStatus: this.getGameStatus(checkWinner(squares)),
-      buttonValue: getButtonValue(squares)
+      gameStatus: this.getGameStatus(winner),
+      buttonValue: getButtonValue(squares),
+      gameFinished: this.checkGameFinished(winner)
     });
+  }
+
+  checkGameFinished(winner){
+    if(winner){
+      return true
+    }
+    for (var i = 0; i < this.state.squares.length; i++){
+      if (this.state.squares[i] == null){
+        return false
+      }
+    }
+    return true
   }
 
   checkIfValidMove(i){
@@ -43,14 +60,16 @@ class Game extends Component {
   getGameStatus(winner){
     if(winner){
       return `Player ${winner} is the Winner!`
-    };
+    }
+    if(!winner && this.checkGameFinished(winner)){
+      return "Cats game!"
+    }
     if(this.state.xTurn){
-      return "Player O's turn"
+      return "Player P's turn"
     }else{
-      return "Player X's turn"
+      return "Player T's turn"
     }
   }
-
 
   render() {
     return (
