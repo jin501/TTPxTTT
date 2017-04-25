@@ -1,12 +1,14 @@
-export function getButtonValue(squares){
-  if(checkWinner(squares)){
+export function getButtonValue(currentBoard){
+  if(checkWinner(currentBoard)){
     return "new game"
   }else{
     return "reset"
   }
 }
 
-export function checkWinner(squares){
+/** checks to see if there is a winner yet based on the current board.
+If winner exists, the token "T" or "P" is returned, else returns null **/
+export function checkWinner(currentBoard){
   const winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -19,8 +21,8 @@ export function checkWinner(squares){
   ]
   for (let i = 0; i < winningCombinations.length; i++) {
     const [a, b, c] = winningCombinations[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+    if (currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a] === currentBoard[c]) {
+      return currentBoard[a];
     }
   }
   return null;

@@ -74,7 +74,7 @@ square on the board to make a move
       return `Player ${winner} is the Winner!`
     }
     if(!winner && this.checkGameFinished(winner)){
-      return "Cats game!"
+      return "It's a tie - Cat's game!"
     }
     if(this.state.xIsNext){
       return "Player P's turn"
