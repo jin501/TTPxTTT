@@ -1,3 +1,13 @@
+/** helper functions for the game logic */
+
+
+/** check to see if current move is valid
+i.e. if it's already filled then it is invalid **/
+export function checkIfValidMove(i){
+    return (this.state.squares[i]) ? false : true
+  }
+
+/** get value of button depending on current status of game **/
 export function getButtonValue(gameFinished){
   return (gameFinished) ? "new game" : "reset"
 }
@@ -39,8 +49,4 @@ export function getGameMessage(winner, turnCount, tIsNext){
     }else{
       return "Player T's turn"
     }
-  }
-
-export function checkIfValidMove(i){
-    return (this.state.squares[i]) ? false : true
   }

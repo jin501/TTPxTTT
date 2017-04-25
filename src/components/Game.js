@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import Button from './Button';
-import {checkWinner, checkIfValidMove, getGameMessage, getButtonValue} from '../gameLogic';
+import {checkIfValidMove, checkWinner, getGameMessage, getButtonValue} from '../gameLogic';
 
 class Game extends Component {
   constructor() {
@@ -59,6 +59,7 @@ square on the board to make a move
     });
   }
 
+  //event handler on the "reset"/"new game" button that starts a new game
   clearGame(){
     this.setState({
       squares: Array(9).fill(null),
