@@ -3,8 +3,8 @@
 
 /** check to see if current move is valid
 i.e. if it's already filled then it is invalid **/
-export function checkIfValidMove(i){
-    return (this.state.squares[i]) ? false : true
+export function checkIfValidMove(i, squares){
+    return (squares[i]) ? false : true
   }
 
 /** get value of button depending on current status of game **/

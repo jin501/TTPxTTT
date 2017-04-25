@@ -26,15 +26,16 @@ square on the board to make a move
     if(this.state.gameFinished){
       return;
     }
+    //get the current state of the board
+    let squares = this.state.squares
+
     // Check to see if it is a valid move
-    if(!checkIfValidMove(i)){
+    if(!checkIfValidMove(i, squares)){
       this.setState({
         gameMessage: `Please make a valid move, Player ${this.state.tIsNext ? 'T' : 'P'}`
       });
       return;
     }
-    //get the current state of the board
-    let squares = this.state.squares
     //determine which token the current turn should be marked with
     squares[i] = this.state.tIsNext ? 'T' : 'P';
     //check to see if there is a winner, returns "T", "P", or null
