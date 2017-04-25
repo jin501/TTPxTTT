@@ -1,9 +1,5 @@
-export function getButtonValue(currentBoard){
-  if(checkWinner(currentBoard)){
-    return "new game"
-  }else{
-    return "reset"
-  }
+export function getButtonValue(gameFinished){
+  return (gameFinished) ? "new game" : "reset"
 }
 
 /** checks to see if there is a winner yet based on the current board.
@@ -27,3 +23,24 @@ export function checkWinner(currentBoard){
   }
   return null;
 }
+
+/** finds out what the appropriate message is depending
+on current Player and game status. **/
+export function getGameMessage(winner, turnCount, tIsNext){
+    if(winner){
+      return `Player ${winner} is the Winner!`
+    }
+    if (turnCount === 8 && !winner){
+      debugger
+      return "It's a tie - Cat's game!"
+    }
+    if(tIsNext){
+      return "Player P's turn"
+    }else{
+      return "Player T's turn"
+    }
+  }
+
+export function checkIfValidMove(i){
+    return (this.state.squares[i]) ? false : true
+  }

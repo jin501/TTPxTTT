@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import Button from './Button';
-import {checkWinner, getGameStatus, getButtonValue} from '../gameLogic';
+import {checkWinner, checkIfValidMove, getGameMessage, getButtonValue} from '../gameLogic';
 
 class Game extends Component {
   constructor() {
     super();
     this.state = {
       squares: Array(9).fill(null),
-      xIsNext: true,
+      tIsNext: true,
       gameMessage: "Player T's Turn",
-      score: [0, 0],
       buttonValue: "reset",
-      gameFinished: false
+      gameFinished: false,
+      turnCount: 0
     };
   }
 
@@ -21,77 +21,53 @@ click event handler for clicking a
 square on the board to make a move
 **/
   handleTurn(i){
+    // debugger
     //first make sure the game isn't already finished
     if(this.state.gameFinished){
       return;
     }
     // Check to see if it is a valid move
-    if(!this.checkIfValidMove(i)){
+    if(!checkIfValidMove(i)){
       this.setState({
-        gameMessage: `Please make a valid move, Player ${this.state.xIsNext ? 'T' : 'P'}`
+        gameMessage: `Please make a valid move, Player ${this.state.tIsNext ? 'T' : 'P'}`
       });
       return;
     }
     //get the current state of the board
     let squares = this.state.squares
     //determine which token the current turn should be marked with
-    squares[i] = this.state.xIsNext ? 'T' : 'P';
-    //check to see if there is a winner
+    squares[i] = this.state.tIsNext ? 'T' : 'P';
+    //check to see if there is a winner, returns "T", "P", or null
     let winner = checkWinner(squares);
+    //true or false check to see if the board is filled or if there is a winner
+    let gameFinished = (this.state.turnCount === 8 || winner) ? true : false
+
     //update the state with the new states
     this.setState({
       //current state of the board
       squares: squares,
       //determine which player is next
-      xIsNext: !this.state.xIsNext,
+      tIsNext: !this.state.tIsNext,
       //determine message to display next player, or if game is won or tie
-      gameMessage: this.getGameStatus(winner),
+      gameMessage: getGameMessage(winner, this.state.turnCount, this.state.tIsNext),
       //get value of button depending on whether game is over or still going
-      buttonValue: getButtonValue(squares),
-      //true or false determining whether game is over
-      gameFinished: this.checkGameFinished(winner)
+      buttonValue: getButtonValue(gameFinished),
+      //true or false determining whether game is over or not
+      gameFinished: gameFinished,
+      //keeps track of the turn count to account for when board is filled
+      turnCount: this.state.turnCount + 1
     });
   }
 
-  checkIfValidMove(i){
-    return (this.state.squares[i]) ? false : true
-  }
-
-  checkGameFinished(winner){
-    if(winner){
-      return true
-    }
-    for (var i = 0; i < this.state.squares.length; i++){
-      if (this.state.squares[i] == null){
-        return false
-      }
-    }
-    return true
-  }
-
-  getGameStatus(winner){
-    if(winner){
-      return `Player ${winner} is the Winner!`
-    }
-    if(!winner && this.checkGameFinished(winner)){
-      return "It's a tie - Cat's game!"
-    }
-    if(this.state.xIsNext){
-      return "Player P's turn"
-    }else{
-      return "Player T's turn"
-    }
-  }
-
   clearGame(){
-    // debugger
     this.setState({
       squares: Array(9).fill(null),
-      xIsNext: true,
+      tIsNext: true,
       gameMessage: "Player T's Turn",
       score: [0, 0],
       buttonValue: "reset",
-      gameFinished: false
+      gameFinished: false,
+      turnCount: 0
     })
   }
 
