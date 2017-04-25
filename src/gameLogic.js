@@ -50,3 +50,14 @@ export function getGameMessage(winner, turnCount, tIsNext){
       return "Player T's turn"
     }
   }
+
+/** Update the overall score after each game with a winner **/
+  export function updateScore(winner, score){
+      if(winner === "P"){
+        score[0] += 1
+        return score
+      }else{
+        score[1] += 1
+        return score
+      }
+    }

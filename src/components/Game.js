@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import Button from './Button';
-import {checkIfValidMove, checkWinner, getGameMessage, getButtonValue} from '../gameLogic';
+import {checkIfValidMove, checkWinner, getGameMessage, getButtonValue, updateScore} from '../gameLogic';
 
 class Game extends Component {
   constructor() {
@@ -57,7 +57,9 @@ square on the board to make a move
       //true or false determining whether game is over or not
       gameFinished: gameFinished,
       //keeps track of the turn count to account for when board is filled
-      turnCount: this.state.turnCount + 1
+      turnCount: this.state.turnCount + 1,
+      //if there is a current winner, then update the overall score
+      score: (winner) ? updateScore(winner, this.state.score) : this.state.score
     });
   }
 
@@ -80,7 +82,9 @@ square on the board to make a move
         TTP <span>x</span> TTT
       </div>
       <div className="game-info">
+        <div className="p-score">{this.state.score[0]}</div>
         {this.state.gameMessage}
+        <div className="t-score">{this.state.score[1]}</div>
         <Button
           value={this.state.buttonValue}
           onClick={()=>this.clearGame()}

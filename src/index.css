@@ -40,6 +40,15 @@ span{
   margin: 10px;
 }
 
+.t-score{
+  font-size: 3em;
+  float: right;
+}
+.p-score{
+  font-size: 3em;
+  float: left;
+}
+
 /* Clear Game Button */
 
 #button{
