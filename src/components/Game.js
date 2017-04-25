@@ -13,7 +13,8 @@ class Game extends Component {
       buttonValue: "reset",
       gameFinished: false,
       turnCount: 0,
-      score: [0,0]
+      score: [0,0],
+      multiPlayer: true
     };
   }
 
@@ -80,12 +81,21 @@ square on the board to make a move
     <div>
       <div className="header">
         TTP <span>x</span> TTT
+        <div className="gameType">
+          -- {(this.state.multiPlayer) ? "Multi Player Game" : "You vs. Computer"} --
+        </div>
       </div>
       <div className="game-info">
+
         <div className="p-score">{this.state.score[0]}</div>
         <div className="t-score">{this.state.score[1]}</div>
         <div className="message">{this.state.gameMessage}</div>
         <Button
+          value={(this.state.multiPlayer) ? "Play against Computer" : "Two Player Game"}
+          onClick={()=>this.clearGame()}
+        />
+        <Button
+          id="clear"
           value={this.state.buttonValue}
           onClick={()=>this.clearGame()}
         />

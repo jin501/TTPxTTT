@@ -34,11 +34,16 @@ span{
   color:#09273f;
 }
 
+.gameType{
+  font-size: 20px;
+  color:#09273f;
+}
+
 /* Game Message */
 .game-info{
   border: rgba(0,0,0,0.9);
   padding: 10px;
-  margin: 15px;
+  /*margin: 15px;*/
 
   /*line-height: 0px;*/
 }
@@ -62,24 +67,26 @@ span{
 
 /* Clear Game Button */
 
-#button{
+.button{
   background-color: #09273f;
 
   color: white;
   cursor: pointer;
   margin: auto;
-  display: block;
+  display: inline;
   border: 2px #09273f solid;
   padding: 3px;
   font-size: 12px;
   font-family: "Lucida Console", Monaco, monospace;
   margin-top: 10px;
 }
-
-#button:focus {
+#clear{
+  margin-left: 15px;
+}
+.button:focus {
   outline: none;
 }
-#button:hover {
+.button:hover {
   background: inherit;
 }
 
