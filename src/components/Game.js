@@ -75,7 +75,18 @@ square on the board to make a move
       turnCount: 0
     })
   }
-
+  switchGame(){
+    this.setState({
+      currentBoard: Array(9).fill(null),
+      tIsNext: true,
+      gameMessage: "Player T's Turn",
+      buttonValue: "reset",
+      gameFinished: false,
+      turnCount: 0,
+      score: [0,0],
+      multiPlayer: !this.state.multiPlayer
+    })
+  }
   render() {
     return (
     <div>
@@ -92,7 +103,7 @@ square on the board to make a move
         <div className="message">{this.state.gameMessage}</div>
         <Button
           value={(this.state.multiPlayer) ? "Play against Computer" : "Two Player Game"}
-          onClick={()=>this.clearGame()}
+          onClick={()=>this.switchGame()}
         />
         <Button
           id="clear"
