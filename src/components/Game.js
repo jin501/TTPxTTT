@@ -83,8 +83,8 @@ square on the board to make a move
       </div>
       <div className="game-info">
         <div className="p-score">{this.state.score[0]}</div>
-        {this.state.gameMessage}
         <div className="t-score">{this.state.score[1]}</div>
+        <div className="message">{this.state.gameMessage}</div>
         <Button
           value={this.state.buttonValue}
           onClick={()=>this.clearGame()}

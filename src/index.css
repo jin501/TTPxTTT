@@ -38,27 +38,38 @@ span{
 .game-info{
   border: rgba(0,0,0,0.9);
   padding: 10px;
-  margin: 10px;
+  margin: 15px;
+
+  /*line-height: 0px;*/
 }
 
+.message{
+  height: 40px;
+  font-style: italic;
+}
 .t-score{
   font-size: 3em;
   float: right;
+  color: #09273f;
+  font-weight: 700;
 }
 .p-score{
   font-size: 3em;
   float: left;
+  color: #09273f;
+  font-weight: 700;
 }
 
 /* Clear Game Button */
 
 #button{
+  background-color: #09273f;
+
   color: white;
   cursor: pointer;
   margin: auto;
   display: block;
   border: 2px #09273f solid;
-  background: inherit;
   padding: 3px;
   font-size: 12px;
   font-family: "Lucida Console", Monaco, monospace;
@@ -69,7 +80,7 @@ span{
   outline: none;
 }
 #button:hover {
-  background-color: #09273f;
+  background: inherit;
 }
 
 /* Game Board */
