@@ -71,20 +71,38 @@ class Game extends Component {
     }
   }
 
+  clearGame(){
+    // debugger
+    this.setState({
+      squares: Array(9).fill(null),
+      xTurn: true,
+      gameStatus: "Player T's Turn",
+      score: [0, 0],
+      buttonValue: "reset",
+      gameFinished: false
+    })
+  }
+
   render() {
     return (
+    <div>
+      <div className="header">
+        TTP x TTT
+      </div>
+      <div className="game-info">
+        {this.state.gameStatus}
+        <Button
+          value={this.state.buttonValue}
+          onClick={()=>this.clearGame()}
+        />
+      </div>
       <div className="game">
-        <div>
           <Board
             squares={this.state.squares}
             onClick={(i) => this.handleTurn(i)}
           />
-        </div>
-        <div className="game-info">
-          {this.state.gameStatus}
-          <Button value={this.state.buttonValue} />
-        </div>
       </div>
+    </div>
     );
   }
 }
