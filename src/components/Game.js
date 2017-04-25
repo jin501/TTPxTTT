@@ -87,7 +87,7 @@ class Game extends Component {
     return (
     <div>
       <div className="header">
-        TTP x TTT
+        TTP <span>x</span> TTT
       </div>
       <div className="game-info">
         {this.state.gameStatus}

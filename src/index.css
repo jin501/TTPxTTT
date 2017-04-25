@@ -1,26 +1,38 @@
 body {
   margin: 0;
   padding: 0;
+  color: white;
   font-family: "Lucida Console", Monaco, monospace;
   /*font-family: "Arial", Gadget, sans-serif;*/
   /*background-color: #222;*/
-  /*background-image: url("../public/bk.jpg");*/
+  background-image: url("../public/bk.jpg");
 }
 
 #root{
   display: flex;
   align-items: center;
   justify-content: center;
-      text-align: center;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .header{
-  color: #1ed760;
+  /*background-color: rgba(0,0,0,0.5);*/
+  /*opacity: 0.2;*/
+  color: #09273f;
   flex: 1 100%;
   font-size: 3em;
-
-  padding: 20px;
+  font-weight: bolder;
+  padding: 0px;
   text-align: center;
+}
+
+span{
+  color:white;
+}
+
+.game-info{
+  margin: 10px;
 }
 .game{
   margin: 10px;
@@ -41,17 +53,16 @@ body {
 }
 
 .square {
-  background: #fff;
-  border: 2px solid;
-  /*outline: 0px;*/
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background: inherit;
+  /*border: 2px solid;*/
+  color:white;
   float: left;
   font-size: 44px;
   font-weight: bold;
-  /*line-height: 34px;*/
   height: 100px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
   text-align: center;
   width: 120px;
 }
@@ -60,7 +71,30 @@ body {
   outline: none;
 }
 
+#horizontal-line{
+  border-bottom:4px solid rgba(9,36,58,0.9);
+}
+#vertical-line{
+  display: inline;
+  background-color: rgba(0,0,0,0.5);
+  border: 0px;
+}
 #button{
+  color: white;
+  cursor: pointer;
   margin: auto;
   display: block;
+  border: 2px #09273f solid;
+  background: inherit;
+  padding: 3px;
+  font-size: 12px;
+  font-family: "Lucida Console", Monaco, monospace;
+  margin-top: 10px;
+}
+
+#button:focus {
+  outline: none;
+}
+#button:hover {
+  background-color: #09273f;
 }
