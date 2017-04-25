@@ -11,6 +11,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+      text-align: center;
+}
+
+#button{
+  margin: auto;
+  display: block;
 }
 
 .header{
