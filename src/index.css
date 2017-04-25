@@ -22,7 +22,6 @@ body {
 /* Header */
 .header{
   width:100%;
-  background-color: rgba(0,0,0,0.23);
   color: white;
   flex: 1 100%;
   font-size: 3em;
@@ -37,6 +36,8 @@ span{
 
 /* Game Message */
 .game-info{
+  border: rgba(0,0,0,0.9);
+  padding: 10px;
   margin: 10px;
 }
 
