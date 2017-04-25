@@ -18,12 +18,12 @@ class Game extends Component {
     };
   }
 
-/**
-click event handler for clicking a
-square on the board to make a move
-**/
-  handleTurn(i){
-    // debugger
+  /**
+  click event handler for clicking a
+  square on the board to make a move
+  for multiPlayer games
+  **/
+  handleMultiPlayerTurns(i){
     //first make sure the game isn't already finished
     if(this.state.gameFinished){
       return;
@@ -64,6 +64,10 @@ square on the board to make a move
     });
   }
 
+  handleSinglePlayerTurn(i){
+    debugger
+  }
+
   //event handler on the "reset"/"new game" button that starts a new game
   clearGame(){
     this.setState({
@@ -75,6 +79,7 @@ square on the board to make a move
       turnCount: 0
     })
   }
+
   switchGame(){
     this.setState({
       currentBoard: Array(9).fill(null),
@@ -89,35 +94,34 @@ square on the board to make a move
   }
   render() {
     return (
-    <div>
-      <div className="header">
-        TTP <span>x</span> TTT
-        <div className="gameType">
-          -- {(this.state.multiPlayer) ? "Multi Player Game" : "You vs. Computer"} --
+      <div>
+        <div className="header">
+          TTP <span>x</span> TTT
+          <div className="gameType">
+            -- {(this.state.multiPlayer) ? "Multi Player Game" : "You vs. Computer"} --
+          </div>
         </div>
-      </div>
-      <div className="game-info">
-
-        <div className="p-score">{this.state.score[0]}</div>
-        <div className="t-score">{this.state.score[1]}</div>
-        <div className="message">{this.state.gameMessage}</div>
-        <Button
-          value={(this.state.multiPlayer) ? "Play against Computer" : "Two Player Game"}
-          onClick={()=>this.switchGame()}
-        />
-        <Button
-          id="clear"
-          value={this.state.buttonValue}
-          onClick={()=>this.clearGame()}
-        />
-      </div>
-      <div className="game">
+        <div className="game-info">
+          <div className="p-score">{this.state.score[0]}</div>
+          <div className="t-score">{this.state.score[1]}</div>
+          <div className="message">{this.state.gameMessage}</div>
+          <Button
+            value={(this.state.multiPlayer) ? "Play against Computer" : "Two Player Game"}
+            onClick={()=>this.switchGame()}
+          />
+          <Button
+            id="clear"
+            value={this.state.buttonValue}
+            onClick={()=>this.clearGame()}
+          />
+        </div>
+        <div className="game">
           <Board
             currentBoard={this.state.currentBoard}
-            onClick={(i) => this.handleTurn(i)}
+            onClick={(this.state.multiPlayer) ? (i) => this.handleMultiPlayerTurns(i) : (i) => this.handleSinglePlayerTurn(i)}
           />
+        </div>
       </div>
-    </div>
     );
   }
 }
