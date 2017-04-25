@@ -1,10 +1,9 @@
+/* Structure */
 body {
   margin: 0;
   padding: 0;
   color: white;
   font-family: "Lucida Console", Monaco, monospace;
-  /*font-family: "Arial", Gadget, sans-serif;*/
-  /*background-color: #222;*/
   background-image: url("../public/bk.jpg");
 }
 
@@ -16,10 +15,14 @@ body {
   margin-top: 20px;
 }
 
+.game{
+  margin: 10px;
+}
+
+/* Header */
 .header{
   width:100%;
   background-color: rgba(0,0,0,0.23);
-  /*opacity: 0.2;*/
   color: white;
   flex: 1 100%;
   font-size: 3em;
@@ -32,21 +35,38 @@ span{
   color:#09273f;
 }
 
+/* Game Message */
 .game-info{
   margin: 10px;
 }
-.game{
-  margin: 10px;
+
+/* Clear Game Button */
+
+#button{
+  color: white;
+  cursor: pointer;
+  margin: auto;
+  display: block;
+  border: 2px #09273f solid;
+  background: inherit;
+  padding: 3px;
+  font-size: 12px;
+  font-family: "Lucida Console", Monaco, monospace;
+  margin-top: 10px;
 }
 
+#button:focus {
+  outline: none;
+}
+#button:hover {
+  background-color: #09273f;
+}
+
+/* Game Board */
 .board-row:after {
   clear: both;
   content: "";
   display: table;
-}
-
-.status {
-  margin-bottom: 10px;
 }
 
 .square {
@@ -54,7 +74,6 @@ span{
   padding: 0;
   border: none;
   background: inherit;
-  /*border: 2px solid;*/
   color:white;
   float: left;
   font-size: 44px;
@@ -75,23 +94,4 @@ span{
   display: inline;
   background-color: rgba(0,0,0,0.5);
   border: 0px;
-}
-#button{
-  color: white;
-  cursor: pointer;
-  margin: auto;
-  display: block;
-  border: 2px #09273f solid;
-  background: inherit;
-  padding: 3px;
-  font-size: 12px;
-  font-family: "Lucida Console", Monaco, monospace;
-  margin-top: 10px;
-}
-
-#button:focus {
-  outline: none;
-}
-#button:hover {
-  background-color: #09273f;
 }
